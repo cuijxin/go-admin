@@ -3,7 +3,7 @@ package config
 import (
 	"github.com/spf13/viper"
 
-	"github.com/lexkong/log"
+	"log"
 )
 
 var cfgDatabase *viper.Viper
@@ -15,24 +15,24 @@ func init() {
 	viper.AddConfigPath("./config")
 	err := viper.ReadInConfig()
 	if err != nil {
-		log.Debug(err)
+		log.Println(err)
 	}
 
 	cfgDatabase = viper.Sub("settings.database")
 	if cfgDatabase == nil {
-		log.Fatal("config not found settings.database")
+		panic("config not found settings.database")
 	}
 	DatabaseConfig = InitDatabase(cfgDatabase)
 
 	cfgApplication = viper.Sub("settings.application")
 	if cfgApplication == nil {
-		log.Fatal("config not found settings.application")
+		panic("config not found settings.application")
 	}
 	ApplicationConfig = InitApplication(cfgApplication)
 
 	cfgJwt = viper.Sub("settings.jwt")
 	if cfgJwt == nil {
-		log.Fatal("config not found settings.jwt")
+		panic("config not found settings.jwt")
 	}
 	JwtConfig = InitJwt(cfgJwt)
 }
