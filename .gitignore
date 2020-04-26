@@ -1,0 +1,7 @@
+.idea
+static/uploadfile
+config/settings.yml
+go-admin
+temp/
+!temp
+vendor
